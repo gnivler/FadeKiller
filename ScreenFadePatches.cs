@@ -1,15 +1,14 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using HarmonyLib;
 
+// ReSharper disable UnusedMember.Local
+
 namespace FadeKiller
 {
-    [HarmonyDebug]
     [HarmonyPatch]
     public static class ScreenFadePatches
     {
-        [HarmonyDebug]
         [HarmonyTargetMethods]
         private static IEnumerable<MethodInfo> TargetMethods()
         {
@@ -17,6 +16,7 @@ namespace FadeKiller
             yield return AccessTools.Method(typeof(ScreenFade), "StartFade");
         }
 
+        // ReSharper disable once RedundantAssignment
         public static void Prefix(ref float seconds)
         {
             seconds = Mod.FadeTime.Value;

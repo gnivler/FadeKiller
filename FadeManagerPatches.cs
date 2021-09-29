@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Reflection;
 using HarmonyLib;
 
@@ -8,11 +7,9 @@ using HarmonyLib;
 
 namespace FadeKiller
 {
-    [HarmonyDebug]
     [HarmonyPatch]
     public class FadeManagerPatches
     {
-        [HarmonyDebug]
         [HarmonyTargetMethods]
         private static IEnumerable<MethodInfo> TargetMethods()
         {
@@ -22,7 +19,7 @@ namespace FadeKiller
         }
 
         // ReSharper disable once RedundantAssignment
-        public static void Prefix(FadeManager __instance, ref float duration)
+        public static void Prefix(ref float duration)
         {
             duration = Mod.FadeTime.Value;
         }
